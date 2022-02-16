@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-*    { margin: 0; padding: 0; }
-body { font-family: '맑은 고딕', '돋움'; font-size: 0.75em; color: #333; }
+*		{margin:0; padding:0 }
+body	{font-family: "맑은 고딕" 돋움; font-size: 0.75em; color: #333;}
 
-.header {
-	width: 1000px;
+.header	{
+	width: 1300px;
 	height: 100px;
-	margin: 50px auto;
-	background-color: #ddd;
+	margin:50px auto;
 }
 
 .header .logo, .header .search-box {
@@ -22,41 +21,115 @@ body { font-family: '맑은 고딕', '돋움'; font-size: 0.75em; color: #333; }
 	font-size: 0;
 	width: 222px;
 	height: 52px;
-	background: #fff url("/ch03/images/nsplite.png") no-repeat 0px -158px/ 457px 434px;
+	background: #fff url("/ch03/images/nsplite.png")  no-repeat 0 -158px / 457px 434px;
 }
 
 .search-box {
-	width: 750px;
+	position: relative;
+	margin-left: 100px;
+	width: 600px;
 	height: 52px;
-	background-color: #ccc;
+	border: 2px solid #04cf5c;
+	background-color: #fff;
 }
 
 .search-box input, .search-box a {
 	display: block;
-}
+}  
 
-.search-box input, .search-box .btn-search, .search-box a {
+.search-box input, .search-box .btn-search, .search-box  a {
 	float: right;
 }
 
 .search-box input {
-	width: 474px;
+	position: absolute;
+	left: 0%;
+	width: 470px;
 	height: 50px;
+	border: 1px solid #fff;
+	font-size: 2em;
+}
+
+.search-box #keyboard {
+	position: absolute;
+	right: 15%;
+	font-size: 0;
+	width: 30px;
+	height: 53px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.search-box #keyboard .keyboard-img {
+	position: absolute;
+	top: 40%;
+	width: 20px;
+	height: 12px;
+	background: url("/ch03/images/nsplite.png")  no-repeat -420px -395px / 457px 434px;
+	vertical-align: top;
+}
+
+.search-box #dropdown {	
+	position: absolute;
+	right: 10%;
+	font-size: 0;
+	width: 20px;
+	height: 53px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.search-box #dropdown .dropdown-img {
+	position: absolute;
+	top : 45%;
+	width: 10px;
+	height: 5px;
+	background: url("/ch03/images/nsplite.png")  no-repeat -408px -77px / 457px 434px;
+}
+
+.search-box .btn-search button {
+	position: relative;
+	right: 0%;
+	font-size: 0;
+	width: 53px;
+	height: 53px;
+	margin-left: 5px;
+	background-color: #04cf5c;
+	border: 1px solid #04cf5c;
+	cursor: pointer;
+}
+
+.search-box .btn-search button .btn-search-img {
+	position: absolute;
+	bottom: 30%;
+	right: 25%;
+	width: 22px;
+	height: 22px;
+	background: url("/ch03/images/nsplite.png")  no-repeat -420px 0 / 457px 434px; 
 }
 
 </style>
 </head>
 <body>
-	<div class='header'>
-		<h1 class='logo'>네이버</h1>
-		<form class='search-box'>
+	<div class="header">
+		<h1 class="logo">네이버</h1>
+		<div class="search-box">
 			<div class="btn-search">
-				<button>돋보기</button>
+				<button>
+					돋보기
+					<span class="btn-search-img"></span>
+				</button>
 			</div>
-			<a id="dropdown" href="#">드롭다운</a>
-			<a id="keyboard" href="#">키보드</a>
-			<input type='text'/>
-		</form>
+			<a href="#"  id="dropdown">
+				드롭다운
+				<span class="dropdown-img"></span>
+			</a>
+			<a href="#"  id="keyboard">
+				키보드
+				<span class="keyboard-img"></span>
+			</a>
+			<input type='text' />
+		</div>
 	</div>
 </body>
 </html>
