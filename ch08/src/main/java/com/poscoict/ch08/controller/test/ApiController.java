@@ -17,9 +17,9 @@ public class ApiController {
 		return "html";
 	}
 	
-	@RequestMapping("/json")
+	@RequestMapping("/json01")
 	public String json() {
-		return "json";
+		return "json01";
 	}
 	
 }
