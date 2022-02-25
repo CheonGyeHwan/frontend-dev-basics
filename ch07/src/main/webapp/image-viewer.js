@@ -2,26 +2,26 @@ var imageViewer = {
 	init : function() {
 		$(function() {	
 			// 첫 화면 사진
-			this.getImage();
+			this._getImage();
 			
 			// 이미지 변경버튼 클릭 시 기능
 			$("#btn-change").click(function() {
-				this.getImage();
+				this._getImage();
 			});
 			
 			// 이미지 사진 클릭 시 기능
 			$(".image-viewer img").click(function() {
-				this.getImage();
+				this._getImage();
 			});
 			
 			// 슬라이드 기능
 			$("#btn-slideshow").click(function() {
-				this.slide();
+				this._slide();
 			});	
 		}.bind(this))	
 	},
 	
-	getImage : function() {
+	_getImage : function() {
 		var index = Math.floor(Math.random() * this.images.length);
 		
 		$(".image-viewer img").attr({
@@ -30,7 +30,7 @@ var imageViewer = {
 		}) 
 	},
 	
-	slide : function() {
+	_slide : function() {
 		this.variables.isBlink = !(this.variables.isBlink);
 			
 		$("#btn-slideshow").html(this.variables.isBlink? "슬라이드쇼 시작" :"슬라이드쇼 중지");
@@ -39,7 +39,7 @@ var imageViewer = {
 			clearInterval(this.variables.interval);
 		} else {
 			this.variables.interval = setInterval(function() {
-				this.getImage();
+				this._getImage();
 			}.bind(this), 3000);
 		}
 	},
