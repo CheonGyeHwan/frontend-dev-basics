@@ -1,28 +1,24 @@
 var imageViewer = {
 	init : function() {
-		this.onJQuery(this);	
-	},
-	
-	onJQuery : function(obj) {
 		$(function() {	
 			// 첫 화면 사진
-			obj.getImage();
+			this.getImage();
 			
 			// 이미지 변경버튼 클릭 시 기능
 			$("#btn-change").click(function() {
-				obj.getImage();
+				this.getImage();
 			});
 			
 			// 이미지 사진 클릭 시 기능
 			$(".image-viewer img").click(function() {
-				obj.getImage();
+				this.getImage();
 			});
 			
 			// 슬라이드 기능
 			$("#btn-slideshow").click(function() {
-				obj.slide(this);
+				this.slide();
 			});	
-		})
+		}.bind(this))	
 	},
 	
 	getImage : function() {
@@ -34,10 +30,10 @@ var imageViewer = {
 		}) 
 	},
 	
-	slide : function(param) {
+	slide : function() {
 		this.variables.isBlink = !(this.variables.isBlink);
 			
-		$(param).html(this.variables.isBlink? "슬라이드쇼 시작" :"슬라이드쇼 중지");
+		$("#btn-slideshow").html(this.variables.isBlink? "슬라이드쇼 시작" :"슬라이드쇼 중지");
 			
 		if (this.variables.isBlink) {
 			clearInterval(this.variables.interval);
