@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.poscoict.ch08.controller.dto.JsonResult;
+import com.poscoict.ch08.controller.dto.XmlResult;
 import com.poscoict.ch08.controller.vo.GuestbookVo;
 
 @Controller
@@ -22,6 +23,17 @@ public class ApiController {
 	@RequestMapping("/html")
 	public String html() {
 		return "<h1>AJAX 연습</h1><p>HTML 데이터</p>";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/xml")
+	public Object xml() {
+		XmlResult.GuestbookVo vo = new XmlResult.GuestbookVo();
+		vo.setNo(1L);
+		vo.setName("둘리");
+		vo.setMessage("호이~");
+		
+		return XmlResult.success(vo);
 	}
 	
 	@ResponseBody
