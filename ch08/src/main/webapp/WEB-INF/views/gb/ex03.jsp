@@ -39,7 +39,6 @@ var fetch = function() {
 				var vo = response.data[i];
 				var html = render(vo);
 				$("#list-guestbook").append(html);
-				startNo  = response.data[i].no;
 			}
 		}
 	});	
@@ -49,12 +48,59 @@ $(function() {
 	// ..
 	// ..
 	// 삭제 다이알로그 객체 만들기
-	var dialogDelete = $("dialog-delete-form").dialog({
+	var dialogDelete = $("#dialog-delete-form").dialog({
 		autoOpen: false,
-		modal: true
+		modal: true,
+		buttons: {
+			"삭제": function() {
+				var no = $("#hidden-no").val();
+				var password = $("#password-delete").val();
+				var url = "${pageContext.request.contextPath }/api/guestbook/delete/" + no;
+				
+				$.ajax({
+					url: url,
+					type: "post",
+					dataType: "json",
+					data: "password=" + password,
+					success: function(response) {
+						if (response.result !== "success") {
+							console.log(response.message);
+							return ;
+						}
+						
+						if (response.data == -1) {
+							$(".validateTips.error").show();
+							$("#password-delete").val("").focus();
+							return ;
+							
+						}
+						
+						// 삭제가 잘 된 경우
+						$("#list-guestbook li[data-no = '" + response.data + "']").remove();
+						dialogDelete.dialog("close");
+					}
+				})
+			},
+			"취소": function() {
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			$("#password-delete").val("");
+			$("#hidden-no").val("");
+			$(".validateTips.error").hide();
+		}
 	});
 	
-
+	// 글 삭제 버튼 Click 이벤트 처리(Live Event, document에 이벤트 위임)
+	$(document).on("click", "#list-guestbook li a", function(event) {
+		event.preventDefault();
+		var no = $(this).data("no");
+		$("#hidden-no").val(no);
+		
+		dialogDelete.dialog("open");
+	})
+	
 	// 최초 리스트 가져오기
 	fetch();
 });
@@ -71,6 +117,7 @@ $(function() {
 				</form>
 				<ul id="list-guestbook"></ul>
 			</div>
+			
 			<div id="dialog-delete-form" title="메세지 삭제" style="display:none">
   				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>
   				<p class="validateTips error" style="display:none">비밀번호가 틀립니다.</p>

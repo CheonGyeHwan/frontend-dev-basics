@@ -3,6 +3,7 @@ package com.poscoict.ch08.controller.api;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,4 +54,18 @@ public class GuestbookController {
 		return JsonResult.success(list);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/delete/{no}")
+	public JsonResult ex03(@PathVariable("no") Long no, @RequestParam(value="password", required=true, defaultValue="") String password) {
+		//result =  guestbookService.delete(no, password)
+		
+		Long data = 0L;
+		// 1. 삭제가 안 된 경우
+		data = -1L;
+		
+		// 2. 삭제가 잘 된 경우
+		data = no;
+		
+		return JsonResult.success(data);
+	}
 }
